@@ -36,6 +36,7 @@ UnitfulAngles = "6fb2a4bd-7999-5318-a3b2-8ad61056cd98"
 [compat]
 AxisArrays = "0.3, 0.4"
 CodecZlib = "0.7"
+DocStringExtensions = "0.8, 0.9"
 FileIO = "1.0"
 Graphics = "0.4, 1.0"
 HDF5 = "0.14, 0.15, 0.16"
@@ -47,7 +48,6 @@ SparsityOperators = "0.3, 0.4"
 StableRNGs = "1.0.0"
 Unitful = "0.17, 1.2"
 UnitfulAngles = "0.6.1"
-DocStringExtensions = "0.8, 0.9"
 julia = "1.5"
 
 [extras]

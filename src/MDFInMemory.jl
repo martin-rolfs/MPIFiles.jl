@@ -1455,6 +1455,22 @@ function saveasMDF(file::HDF5.File, mdf::MDFv2InMemory; failOnInconsistent::Bool
         result = string.(result)
       end
 
+      # Check if measurement data 
+      if result isa measurement.data        
+        # create data set to save data to 
+        ndims = length(size(result)) 
+        dset = create_dataset(file["measurement"], "data", datatype(eltype(result)), dataspace(size(result)), alloc_time = HDF5.H5D_ALLOC_TIME_EARLY)
+        # read data set as memory map 
+        data = HDF5.readmmap(dset)
+        # copy framewise to prevent loading the whole matrix in RAM 
+        for samples ∈ 1:size(result, 1) 
+          exprString = "data[samples,"*":"^ndims*"] = result[samples,"*":"^ndims*"]"
+          eval(Meta.parse(exprString)) # copy correct dimensions over
+        end
+
+        continue
+      end  
+
       file[key] = result
     end
   end
