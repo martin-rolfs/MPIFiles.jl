@@ -1456,8 +1456,9 @@ function saveasMDF(file::HDF5.File, mdf::MDFv2InMemory; failOnInconsistent::Bool
       end
 
       # Check if measurement data 
-      if result isa measurement.data        
+      if result isa MDFv2Measurement.data        
         # create data set to save data to 
+        @info "This is my implementation"
         ndims = length(size(result)) 
         dset = create_dataset(file["measurement"], "data", datatype(eltype(result)), dataspace(size(result)), alloc_time = HDF5.H5D_ALLOC_TIME_EARLY)
         # read data set as memory map 
